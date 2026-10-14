@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>The Glamping Experts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: Chatsworth-style. Light uppercase sans headings with wide tracking, stone bands, deep blue masthead, thin square buttons, lots of air. */
+:root{
+  --blue:#0a3c4b; --blue-2:#1d5363; --moss:#55653a; --bracken:#9a5427; --heather:#76587a; --grit:#857a69;
+  --bg:#ffffff; --sheet:#ffffff; --stone:#e6e4db; --fg:#111111; --muted:#5c6366; --rule:#d9d6cb; --ink:var(--blue);
+  --onblue:#ffffff; --onblue-dim:#a9c0c6; --field:#f4f3ee;
+  --sans:"Jost","Avenir Next","Century Gothic","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1416;--sheet:#0c1416;--stone:#162125;--fg:#ecebe6;--muted:#a3abad;--rule:#26353a;--ink:#9cc3cf;--field:#121c1f;
+  --grit:#b0a592;--heather:#b597b8;--bracken:#d38b56;--moss:#a1b27a;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1416;--sheet:#0c1416;--stone:#162125;--fg:#ecebe6;--muted:#a3abad;--rule:#26353a;--ink:#9cc3cf;--field:#121c1f;
+  --grit:#b0a592;--heather:#b597b8;--bracken:#d38b56;--moss:#a1b27a;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--fg);font:400 17px/1.7 var(--sans)}
+a{color:var(--ink)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:1120px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--sans);margin:0;text-wrap:balance;line-height:1.25;font-weight:300;letter-spacing:.06em;text-transform:uppercase}
+p{margin:0;max-width:66ch}
+.label{font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--bracken);outline-offset:2px}
+
+.preview{background:var(--stone);color:var(--fg);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding-block:6px}
+.top{background:var(--blue);color:var(--onblue);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.top .inner{display:flex;align-items:center;gap:24px;padding-block:18px;flex-wrap:wrap}
+.brand{font-weight:300;font-size:1.35rem;letter-spacing:.2em;text-transform:uppercase;color:var(--onblue);text-decoration:none;line-height:1}
+.brand small{display:block;font-size:.58rem;font-weight:400;letter-spacing:.24em;color:var(--onblue-dim);margin-top:6px}
+nav{display:flex;gap:4px 26px;flex-wrap:wrap;margin-left:auto}
+nav a{color:var(--onblue);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid transparent}
+nav a:hover,nav a[aria-current="page"]{border-bottom-color:var(--onblue)}
+
+.hero{background:var(--blue);color:var(--onblue);position:relative;overflow:hidden}
+.hero svg.contours{display:none}
+.hero .inner{position:relative;padding-block:88px 80px;display:grid;gap:22px;justify-items:center;text-align:center}
+.hero h1{font-size:clamp(2rem,5.5vw,3.4rem);font-weight:300;letter-spacing:.08em;line-height:1.15;max-width:22ch}
+.hero p{font-size:1.1rem;font-weight:300;opacity:.92;max-width:52ch}
+.hero .label{color:var(--onblue-dim)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+.btn{display:inline-block;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:13px 24px;border:1px solid var(--blue);background:var(--blue);color:#fff;text-decoration:none;cursor:pointer}
+.hero .btn{background:#fff;color:var(--blue);border-color:#fff}
+.btn.ghost,.hero .btn.ghost{background:transparent;border-color:currentColor;color:inherit}
+.btn:hover{opacity:.88}
+
+main{padding-block:0 0}
+.sheet{background:var(--sheet)}
+.block{padding:64px clamp(16px,4vw,40px);display:grid;gap:28px}
+.block:nth-child(even){background:var(--stone)}
+.head{display:grid;gap:10px;justify-items:center;text-align:center}
+.head .label{color:var(--muted)}
+.head h2{font-size:clamp(1.5rem,3.6vw,2.1rem);color:var(--ink)}
+.intro{color:var(--muted);font-weight:300;font-size:1.05rem}
+.block > .intro{justify-self:center;text-align:center}
+.pagehead{padding:64px clamp(16px,4vw,40px) 44px;display:grid;gap:14px;justify-items:center;text-align:center;background:var(--stone)}
+.pagehead h1{font-size:clamp(1.8rem,5vw,2.9rem);color:var(--ink)}
+.crumbs{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.crumbs a{color:var(--muted)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.tile{display:grid;gap:10px;padding:28px 22px;text-decoration:none;color:var(--fg);background:var(--sheet);justify-items:center;text-align:center}
+.block:nth-child(even) .tile{background:var(--stone)}
+.tile:hover{background:var(--field)}
+.tile svg{width:72px;height:54px;stroke:var(--ink);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.tile h3{font-size:1rem;letter-spacing:.12em}
+.tile span{font-size:.9rem;color:var(--muted);font-weight:300}
+.tile .count{font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--bracken)}
+
+.makers{display:grid;border-top:1px solid var(--rule)}
+.maker{display:grid;grid-template-columns:170px 1fr auto;gap:24px;padding:26px 0;border-bottom:1px solid var(--rule);align-items:start}
+.maker > *{min-width:0}
+.ph{aspect-ratio:4/3;max-width:100%;background:var(--stone);display:grid;place-items:center;text-align:center;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:8px}
+.maker h3{font-size:1.05rem;letter-spacing:.1em}
+.maker .loc{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:4px 0 8px}
+.maker p{font-weight:300}
+.maker .price{font-weight:500;font-size:1rem;color:var(--fg);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.maker .price small{display:block;font-weight:400;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.maker .act{display:grid;gap:12px;justify-items:end}
+@media (max-width:640px){.maker{grid-template-columns:96px 1fr}.maker .act{grid-column:1/-1;justify-items:start}.maker .price{text-align:left}}
+
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.twocol > *{min-width:0}
+@media (max-width:760px){.twocol{grid-template-columns:1fr}}
+.notes{display:grid;gap:10px}
+.notes .label{color:var(--moss)}
+.notes ul{margin:0;padding-left:1.1em;font-weight:300}
+
+.glist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.glist li{border-bottom:1px solid var(--rule)}
+.glist a{display:grid;grid-template-columns:1fr auto;gap:16px;padding:18px 0;text-decoration:none;color:var(--fg)}
+.glist h3{font-size:.98rem;letter-spacing:.06em;line-height:1.4}
+.glist p{color:var(--muted);font-size:.94rem;font-weight:300}
+.glist .go{font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);align-self:center}
+
+.article{display:grid;gap:18px;max-width:70ch;justify-self:center;font-weight:300}
+.article h3{font-size:1.1rem;letter-spacing:.1em;color:var(--ink);margin-top:14px;font-weight:400}
+.article ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.article .src{font-size:.85rem;color:var(--muted)}
+.article .aside{background:var(--stone);padding:16px 18px;font-size:.95rem}
+.related{display:flex;flex-wrap:wrap;gap:10px}
+.related a{font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--ink);color:var(--ink);text-decoration:none}
+
+.bundles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.bundle{padding:30px 26px;background:var(--sheet);display:grid;gap:14px;align-content:start}
+.bundle h3{font-size:1.15rem;letter-spacing:.12em;color:var(--ink)}
+.bundle ol{margin:0;padding-left:1.2em;display:grid;gap:4px;font-weight:300}
+
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;background:var(--stone);padding:24px}
+.calc > *{min-width:0}
+.calc label{display:grid;gap:6px;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.calc input{font:inherit;font-size:1rem;letter-spacing:0;text-transform:none;font-weight:400;padding:10px 12px;border:1px solid var(--rule);background:var(--sheet);color:var(--fg);width:100%}
+.out{display:grid;gap:14px;align-content:start}
+.out div{border-bottom:1px solid var(--rule);padding-bottom:10px}
+.out b{display:block;font-size:1.9rem;font-weight:300;letter-spacing:.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.out span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:640px){.calc{grid-template-columns:1fr}}
+
+form.enq{display:grid;gap:14px;max-width:560px;width:100%;justify-self:center}
+form.enq label{display:grid;gap:6px;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+form.enq input,form.enq select,form.enq textarea{font:inherit;font-size:1rem;letter-spacing:0;text-transform:none;font-weight:400;padding:11px 12px;border:1px solid var(--rule);background:var(--sheet);color:var(--fg);width:100%}
+.ok{padding:12px 14px;background:var(--stone);font-weight:300}
+
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;text-align:center}
+.strip div{display:grid;gap:8px}
+.strip b{font-weight:400;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.strip span{color:var(--muted);font-size:.95rem;font-weight:300}
+
+footer{background:var(--blue);color:var(--onblue-dim);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+footer .inner{padding-block:36px;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
+footer a{color:var(--onblue)}
+</style>
+
+</head>
+<body>
+<div class="preview gut">Private preview. Not public, and enquiries are not sent.</div>
+<header class="top gut"><div class="inner">
+  <a class="brand" href="#home">The Glamping Experts<small>Made in Britain</small></a>
+  <nav id="nav"></nav>
+</div></header>
+<div id="app"></div>
+<footer class="gut"><div class="inner">
+  <span>The Glamping Experts · Made in Britain</span>
+  <span><a href="#safety">Safety</a> · <a href="#advice">Advice</a> · <a href="#news">News</a></span>
+</div></footer>
+
+<script>
+const MAKERS = [{"n": "Orchard Ovens", "c": "communal", "loc": "Lancashire", "p": "Wood-fired and gas-fired outdoor ovens and outdoor kitchens.", "price": null}, {"n": "The Stone Bake Oven Company", "c": "communal", "loc": "Worcestershire", "p": "Wood-fired outdoor ovens, made to order.", "price": null}, {"n": "Vitcas", "c": "communal", "loc": "Bristol", "p": "Wood-fired pizza and bread ovens.", "price": "£995 to £2,400"}, {"n": "Composite Garden Sheds", "c": "saunas", "loc": null, "p": "Handcrafted outdoor saunas.", "price": null}, {"n": "Wildhut", "c": "saunas", "loc": null, "p": "Outdoor saunas.", "price": null}, {"n": "Rustic Tubs", "c": "hot-tubs", "loc": "Lancashire", "p": "Handmade cedar hot tubs.", "price": null}, {"n": "Town & Country Hot Tubs", "c": "hot-tubs", "loc": "Somerset", "p": "Western red cedar hot tubs, made to order.", "price": null}, {"n": "Riviera Hot Tubs", "c": "hot-tubs", "loc": "Devon", "p": "Cedar barrel hot tubs and saunas.", "price": null}, {"n": "Chilli Penguin Stoves", "c": "stoves", "loc": "North Wales", "p": "Handmade wood burning and multi-fuel stoves.", "price": null}, {"n": "Dean Forge", "c": "stoves", "loc": "Devon", "p": "Wood burning and multi-fuel stoves.", "price": null}, {"n": "Dunsley Heat Ltd", "c": "stoves", "loc": "West Yorkshire", "p": "Wood burning and multi-fuel stoves.", "price": null}, {"n": "Town & Country Fires", "c": "stoves", "loc": "North Yorkshire", "p": "Steel wood burning stoves.", "price": null}, {"n": "Woodwarm Stoves", "c": "stoves", "loc": "Devon", "p": "Wood burning and multi-fuel stoves.", "price": null}, {"n": "Clock Woodburners", "c": "stoves", "loc": "Cheshire", "p": "Wood burning stoves.", "price": null}, {"n": "Vesta Stoves", "c": "stoves", "loc": "Lancashire", "p": "Wood burning, multi-fuel and outdoor log burners.", "price": null}, {"n": "Rase Outdoor Living", "c": "communal", "loc": "Lincolnshire", "p": "Outdoor kitchens, pergolas and pizza ovens, made to order.", "price": "£5,095 to £40,000"}, {"n": "The British Outdoor Kitchen Co", "c": "communal", "loc": "Leicestershire", "p": "Outdoor kitchens, made to order.", "price": null}, {"n": "TG Buildings (Tunstall Garden Buildings)", "c": "shelters", "loc": "Staffordshire", "p": "Hot tub gazebos and thatched gazebos.", "price": null}, {"n": "Andrew Crace", "c": "communal", "loc": "Hertfordshire", "p": "Oak and iroko tables, benches and chairs.", "price": null}, {"n": "Teak Garden Furniture Ltd", "c": "communal", "loc": "County Durham", "p": "Teak, oak, sweet chestnut and iroko tables, benches, chairs and planters.", "price": null}, {"n": "Oxford Planters Ltd", "c": "communal", "loc": "Oxfordshire", "p": "Solid oak tables, benches and carvers, made to order.", "price": null}, {"n": "Blackdown Shepherd Huts", "c": "shepherd-huts", "loc": "Somerset", "p": "Luxury shepherd huts, hand-built.", "price": null}, {"n": "Bluebell Shepherd Huts", "c": "shepherd-huts", "loc": "Northumberland", "p": "Traditional shepherd huts, built to order. Also sold as kits.", "price": null}, {"n": "Stockman Shepherd Huts", "c": "shepherd-huts", "loc": "Pembrokeshire", "p": "Handmade shepherd huts on cast-iron wheels.", "price": null}, {"n": "Red Sky Shepherd's Huts", "c": "shepherd-huts", "loc": "Oxfordshire", "p": "Shepherd huts, made to order.", "price": null}, {"n": "Greendown Shepherd Huts", "c": "shepherd-huts", "loc": "Somerset", "p": "Oak shepherd huts and lodge cabins.", "price": "From £20,200 + VAT"}, {"n": "The Shepherd's Hut Co", "c": "shepherd-huts", "loc": "Kent", "p": "Luxury shepherd huts, made to order.", "price": null}, {"n": "Stamford Shepherd Huts", "c": "shepherd-huts", "loc": "Lincolnshire", "p": "Traditional luxury shepherd huts.", "price": "£25,000 to £65,000 + VAT"}, {"n": "Landpod", "c": "glamping-pods", "loc": "Staffordshire", "p": "Off-grid camping pods and cabins.", "price": null}, {"n": "Pod Factory", "c": "glamping-pods", "loc": "Warwickshire", "p": "Luxury glamping and camping pods.", "price": null}, {"n": "The British Pod Company", "c": "glamping-pods", "loc": "Lancashire", "p": "Glamping pods.", "price": null}, {"n": "Pods by Future Rooms", "c": "glamping-pods", "loc": "Worcestershire", "p": "Glamping pods.", "price": null}, {"n": "Lune Valley Pods", "c": "glamping-pods", "loc": "Lancashire", "p": "Camping pods, made to order.", "price": null}, {"n": "JMK Oak Frame", "c": "communal", "loc": "Leicestershire", "p": "Oak pergolas and gazebos, made to order.", "price": null}, {"n": "Shire Oak", "c": "communal", "loc": "Hampshire", "p": "Oak gazebos and pergolas, made to order.", "price": null}, {"n": "Wyre Oak", "c": "communal", "loc": null, "p": "Oak-framed gazebo kits and made-to-order builds.", "price": "From £3,200 + VAT"}, {"n": "Radnor Oak", "c": "communal", "loc": "Powys", "p": "Oak-framed gazebos and shelters.", "price": null}, {"n": "Enville Oak Ltd", "c": "communal", "loc": "West Midlands", "p": "Oak pergolas and gazebos, made to order.", "price": null}, {"n": "Made in Oak", "c": "communal", "loc": "Wiltshire", "p": "Green oak frames from FSC-certified oak, made to order.", "price": null}, {"n": "Bushman Wood Fired Ovens", "c": "communal", "loc": "Worcestershire", "p": "Wood-fired, gas and dual-fuel ovens, handmade.", "price": "£5,260 to £41,029 inc. VAT"}, {"n": "BCT Outdoors", "c": "tents", "loc": "Glasgow", "p": "Bell tents in 4, 5 and 6 metre sizes, in fire-retardant polycotton canvas.", "price": null}];
+
+const ICONS = {
+  'tents':'<svg viewBox="0 0 64 48"><path d="M32 4 6 40h52z"/><path d="M32 4v36"/><path d="M26 40l6-14 6 14"/><path d="M2 40h60"/></svg>',
+  'shepherd-huts':'<svg viewBox="0 0 64 48"><path d="M8 32V18q24-14 48 0v14z"/><path d="M8 32h48"/><circle cx="18" cy="38" r="5"/><circle cx="46" cy="38" r="5"/><path d="M28 32V22h8v10"/><path d="M44 10v6"/></svg>',
+  'glamping-pods':'<svg viewBox="0 0 64 48"><path d="M8 40V24a24 18 0 0 1 48 0v16z"/><path d="M4 40h56"/><path d="M27 40V28h10v12"/></svg>',
+  'hot-tubs':'<svg viewBox="0 0 64 48"><path d="M10 22h44v18H10z"/><path d="M10 28h44"/><path d="M22 16q-3-4 0-8M32 16q-3-4 0-8M42 16q-3-4 0-8"/></svg>',
+  'saunas':'<svg viewBox="0 0 64 48"><ellipse cx="32" cy="26" rx="22" ry="14"/><path d="M14 26h36"/><path d="M26 18v16M38 18v16"/><path d="M12 42h40"/></svg>',
+  'stoves':'<svg viewBox="0 0 64 48"><path d="M20 16h24v26H20z"/><path d="M29 4v12"/><path d="M24 22h16v14H24z"/><path d="M32 33q-4-3 0-8q4 5 0 8"/><path d="M20 42v3M44 42v3"/></svg>',
+  'shelters':'<svg viewBox="0 0 64 48"><path d="M6 16 32 6l26 10"/><path d="M12 16v26M52 16v26"/><path d="M18 32h28v10H18z"/></svg>',
+  'communal':'<svg viewBox="0 0 64 48"><path d="M8 20 32 6l24 14"/><path d="M12 18v24h40V18"/><path d="M12 42 52 18M12 18l40 24"/></svg>',
+};
+
+const CATS = [
+  {id:'shepherd-huts',g:'glamp',with:['hot-tubs','stoves','saunas'],name:'Shepherd huts',title:'Luxury shepherd huts for sale',short:'Hand-built in Britain',
+   intro:'Hand-built luxury shepherd huts for one pitch or a whole field.',
+   check:['Ask whether the hut is built to sit on wheels or a fixed base, because that affects planning and site licensing.','Check the delivery route: most huts arrive on a lorry and need firm, level access.','Ask for the electrical installation certificate at handover.'],guides:['planning','electrical','earnings']},
+  {id:'glamping-pods',g:'glamp',with:['hot-tubs','stoves','communal'],name:'Glamping pods',title:'Luxury glamping pods for sale',short:'Timber pods for single pitches or whole sites',
+   intro:'Timber glamping pods, many with a bathroom and kitchenette built in.',
+   check:['Ask whether the pod arrives finished or is built on site.','Check what base and services it needs.','Ask about insulation if you plan to let it all year.'],guides:['earnings','hut-or-pod','planning','gas-water']},
+  {id:'tents',g:'glamp',with:['stoves','hot-tubs','communal'],name:'Bell and safari tents',title:'Luxury glamping tents for sale',short:'Canvas tents for seasonal pitches',
+   intro:'Canvas bell tents for summer pitches.',
+   check:['Ask for fire-retardant canvas, and check its certificate.','Plan where the tent goes in winter, and how you will dry it before storing.','A wooden deck under each tent keeps it level and dry.'],guides:['earnings','planning','fire']},
+  {id:'hot-tubs',g:'glamp',with:['shelters','shepherd-huts','glamping-pods'],name:'Hot tubs',title:'Cedar hot tubs for sale',short:'Wood-fired and electric cedar tubs',
+   intro:'Cedar hot tubs, wood-fired or electric.',
+   check:['Decide between wood-fired and electric heating before you order.','Plan how you will test and record water quality between guests.','Check the ground can take the weight of a full tub.'],guides:['hot-tubs','earnings']},
+  {id:'saunas',g:'glamp',with:['hot-tubs','communal'],name:'Saunas',short:'Garden and site saunas',
+   intro:'Outdoor saunas for a single pitch or a shared space.',
+   check:['Check the heater type and what electrical supply it needs.','Agree where it will sit in your fire risk assessment.'],guides:['fire','electrical']},
+  {id:'stoves',g:'glamp',with:['shepherd-huts','glamping-pods','tents'],name:'Wood burning stoves',short:'Small stoves sized for huts and pods',
+   intro:'Small wood burners sized for huts and pods.',
+   check:['Use a HETAS-registered installer, or notify building control.','Fit a carbon monoxide alarm with any new solid fuel stove.','Check flue clearances against the hut\'s instructions.'],guides:['stoves','fire']},
+  {id:'shelters',g:'glamp',with:['hot-tubs'],name:'Hot tub shelters and gazebos',short:'Cover for tubs and seating',
+   intro:'Shelters and gazebos to keep a hot tub in use in any weather.',
+   check:['Check the size against your tub before ordering.'],guides:['hot-tubs']},
+  {id:'communal',g:'glamp',with:['hot-tubs','saunas'],name:'Communal areas',short:'Gazebos, outdoor kitchens and seating',
+   intro:'Oak gazebos and pergolas, outdoor kitchens, wood-fired ovens and hardwood seating for shared spaces.',
+   check:['Check whether a permanent structure needs planning permission.','Site ovens away from timber units and include them in your fire risk assessment.','Leave guests clear instructions for lighting and putting out an oven.'],guides:['planning','fire']}
+];
+
+const GUIDES = [
+ {id:'checklist',t:'The glamping compliance checklist: everything to sort before your first guest',s:'Planning, licences, safety checks, insurance and paperwork, in the order most people tackle them.',cats:['shepherd-huts','glamping-pods','hot-tubs'],b:`
+<p>Opening a hut or pod to paying guests brings in rules on planning, fire, electrics, gas, water and insurance. This list covers what applies to most small sites in England. Wales, Scotland and Northern Ireland have their own versions of several of these rules, so check with your council if you are outside England.</p>
+<h3>Before you buy</h3>
+<ul><li>Speak to your local planning authority. Most permanent glamping units need planning permission. See the planning guide.</li><li>Check whether a unit on wheels counts as a caravan where you are, because that can bring in a caravan site licence.</li><li>Check your insurer will cover paying guests on the land.</li></ul>
+<h3>Before you open</h3>
+<ul><li>Write a fire risk assessment. The law requires one for any paying guest accommodation.</li><li>Fit smoke alarms, and a carbon monoxide alarm wherever there is a stove or gas appliance.</li><li>Get the fixed wiring inspected and keep the certificate.</li><li>PAT test the portable appliances you supply to guests.</li><li>Get gas appliances checked by a Gas Safe registered engineer.</li><li>If the water comes from a private supply, tell your council, which may need to risk assess and test it.</li><li>If you have a hot tub, write a risk assessment and a water testing routine.</li><li>Arrange public liability insurance.</li></ul>
+<h3>Every year</h3>
+<ul><li>Review the fire risk assessment.</li><li>Renew the gas safety check.</li><li>Re-test portable appliances at the interval your risk assessment sets.</li><li>Have stove flues swept.</li></ul>
+<div class="aside">Rules vary between councils, so check the details for your site.</div>`},
+ {id:'electrical',t:'Electrical safety for shepherd huts and pods: PAT testing, inspections and hook-ups',s:'What needs testing, how often, and what to ask for at handover.',cats:['shepherd-huts','glamping-pods','saunas'],b:`
+<p>When you let a hut or pod to paying guests, the Electricity at Work Regulations 1989 put a duty on you to keep the electrics safe. In practice that means two kinds of check.</p>
+<h3>The fixed installation</h3>
+<p>The wiring, consumer unit, sockets and the supply cable from your house or hook-up post are the fixed installation. A qualified electrician inspects these and issues an Electrical Installation Condition Report, known as an EICR. When a new hut arrives, ask for its electrical installation certificate and keep it with your safety paperwork.</p>
+<h3>Portable appliances</h3>
+<p>Kettles, toasters, heaters, lamps and anything else guests can plug in are portable appliances. PAT testing is the usual way to show they are safe. How often depends on your risk assessment, but holiday lets commonly test once a year because guests move appliances around and use them hard.</p>
+<h3>Outdoor supplies</h3>
+<ul><li>Supply cables to a field need to be suitable for burial or protected from damage.</li><li>Outdoor sockets and hot tub supplies need RCD protection.</li><li>Keep a record of every test with the date and the result.</li></ul>
+<div class="aside"><a href="#pat-testing">Book a PAT test</a> for your huts and pods.</div>`},
+ {id:'fire',t:'Fire safety for glamping: your fire risk assessment explained',s:'The Fire Safety Order, alarms, extinguishers, escape routes and spacing between units.',cats:['shepherd-huts','glamping-pods','stoves'],b:`
+<p>The Regulatory Reform (Fire Safety) Order 2005 applies to paying guest accommodation in England and Wales, including huts and pods. It makes the owner or operator the "responsible person", who must carry out a fire risk assessment and act on it.</p>
+<h3>What the assessment covers</h3>
+<ul><li>What could start a fire, such as stoves, ovens, heaters, candles and barbecues.</li><li>Who is at risk, including guests who do not know the site.</li><li>How guests are warned, usually through smoke alarms.</li><li>How they get out, and whether doors open easily from inside.</li><li>What firefighting equipment is provided, such as a fire blanket and an extinguisher.</li></ul>
+<h3>Spacing</h3>
+<p>Timber units need space between them so a fire in one does not spread to the next. Councils and fire services often ask about separation distances, so agree your layout with them before units arrive.</p>
+<p>The government publishes a guide on fire safety in small paying guest accommodation, which is a sensible place to start before writing your own assessment.</p>`},
+ {id:'planning',t:'Do I need planning permission for a shepherd hut or glamping pod?',s:'The 28 and 60 day rules, caravan site licences, and when to speak to the council.',cats:['shepherd-huts','glamping-pods','communal'],b:`
+<p>In most cases, yes. Placing a hut or pod in a field and letting it out year round usually counts as a change of use of the land, and that needs planning permission.</p>
+<h3>The temporary use rules</h3>
+<p>In England, permitted development rules allow land to be used temporarily for some purposes, including camping, for a limited number of days a year without a planning application. The limits and conditions vary, and they are written mainly with tents in mind. They rarely cover a hut or pod that stays on site.</p>
+<h3>Huts on wheels</h3>
+<p>A hut on wheels may meet the legal definition of a caravan. If it does, you may need a caravan site licence from the council as well as planning permission.</p>
+<h3>What to do</h3>
+<ul><li>Ask your council for pre-application advice before buying.</li><li>Check for anything that tightens the rules, such as a National Park, an Area of Outstanding Natural Beauty or a listed building nearby.</li><li>Think about access, parking, drainage and neighbours, because those are the points councils most often raise.</li></ul>
+<div class="aside">Rules vary between councils, so check the details for your site.</div>`},
+ {id:'earnings',t:'What could a glamping unit earn? Costs, nightly rates and payback',s:'Work it out for a shepherd hut, pod, tent or cabin with the calculator.',cats:['shepherd-huts','glamping-pods','hot-tubs'],calc:true,b:`
+<p>Earnings depend on your location, nightly rate, the number of nights you let and what each stay costs you. Put your own figures into the calculator below.</p>`},
+ {id:'stoves',t:'Wood burners in huts: safe installation, carbon monoxide alarms and HETAS',s:'Flue clearances, Building Regulations Part J and instructions for guests.',cats:['stoves','shepherd-huts'],b:`
+<p>A stove in a small timber building needs careful installation, because heat and carbon monoxide build up quickly in a small space.</p>
+<h3>Who fits it</h3>
+<p>Building Regulations Part J covers stoves and flues. The simplest route is a HETAS-registered installer, who can self-certify the work. Otherwise you need to notify building control.</p>
+<h3>Carbon monoxide</h3>
+<p>Installing a new solid fuel appliance brings a requirement for a carbon monoxide alarm in the same room. Test it before every stay.</p>
+<h3>For guests</h3>
+<ul><li>Leave clear written instructions on lighting, refuelling and the air controls.</li><li>Supply dry, seasoned wood.</li><li>Have the flue swept at least once a year, and more often in heavy use.</li></ul>`},
+ {id:'hot-tubs',t:'Hot tubs at holiday lets: hygiene, Legionella and the HSE guidance',s:'Water testing, cleaning records and what guests should be told.',cats:['hot-tubs','shelters'],b:`
+<p>A hot tub at a holiday let counts as a commercial spa pool. The Health and Safety Executive's guidance, HSG282, sets out how to control Legionella and other bacteria in spa pools used by the public.</p>
+<h3>What it means in practice</h3>
+<ul><li>Write a risk assessment for the tub.</li><li>Test the water regularly and keep a written record.</li><li>Drain, clean and refill between guests, or follow the treatment routine your risk assessment sets.</li><li>Keep filters clean and replace them on schedule.</li></ul>
+<h3>Wood-fired tubs</h3>
+<p>Many wood-fired tubs are filled fresh for each stay, which makes hygiene simpler, but you still need to clean them properly and record that you did.</p>
+<h3>For guests</h3>
+<p>Leave rules on use, including advice for children and anyone with health conditions, and say who to call if something goes wrong.</p>`},
+ {id:'hut-or-pod',t:'Shepherd hut, glamping pod or cabin: which should you buy?',s:'How they compare on price, planning, lifespan and what guests expect.',cats:['shepherd-huts','glamping-pods'],b:`
+<p>All three can work. The right one depends on your land, your budget and how many units you plan to run.</p>
+<h3>Shepherd huts</h3>
+<p>A hut suits a single pitch and has a strong identity, so it photographs well on booking sites. Most sit on wheels, which affects planning and licensing, as the planning guide explains.</p>
+<h3>Glamping pods</h3>
+<p>Pods suit a row of units on a larger site. Many come with a bathroom and kitchenette built in, which saves building a separate shower block.</p>
+<h3>Cabins</h3>
+<p>Cabins give the most space and suit families, but they are more likely to be treated as permanent buildings by planners.</p>
+<p>Whichever you choose, check what is included, what the base and services cost, and how long delivery takes.</p>`},
+ {id:'gas-water',t:'Gas, water and waste: LPG safety, private water supplies and toilets',s:'Gas Safe checks, council water testing and off-grid options.',cats:['glamping-pods','shepherd-huts'],b:`
+<h3>Gas</h3>
+<p>If a unit has an LPG hob, heater or boiler, the Gas Safety (Installation and Use) Regulations 1998 apply to letting it. Appliances need a safety check every year by a Gas Safe registered engineer, and you keep the record.</p>
+<h3>Water</h3>
+<p>If your water comes from a borehole, well or spring, it counts as a private supply. Once paying guests use it, your council may need to risk assess it and test it. Tell them before you open.</p>
+<h3>Waste</h3>
+<p>A toilet or shower in a unit needs somewhere for the waste to go. Options include connecting to the mains sewer, a septic tank or treatment plant, or composting toilets. Discharges to ground or water come under Environment Agency rules, so check before you install.</p>`},
+ {id:'money',t:'Insurance, business rates and tax for glamping sites',s:'What usually applies to a small site, and when to call an accountant.',cats:['shepherd-huts','glamping-pods'],b:`
+<h3>Insurance</h3>
+<p>Standard farm or home insurance often excludes paying guests. You will usually need cover for the units themselves and public liability insurance for guests on the land.</p>
+<h3>Business rates</h3>
+<p>In England, a self-catering unit is generally assessed for business rates rather than council tax if it is available to let for at least 140 days a year and actually let for at least 70. Small business rates relief may reduce the bill.</p>
+<h3>Tax</h3>
+<p>The furnished holiday lettings tax regime was abolished from April 2025, which changed how holiday let income is taxed. Income from huts and pods counts toward your turnover for VAT purposes too.</p>
+<div class="aside">Speak to an accountant about your own situation.</div>`}
+];
+
+const NEWS = [
+ {id:'news-short-let-register',d:'13 October 2026',tag:'Industry news',t:'Short-let register for England now expected in March 2027',s:'Every glamping unit let to guests is likely to need registering.',cats:['shepherd-huts','glamping-pods','tents'],b:`
+<p>The government now expects England's mandatory registration scheme for short-term lets to start in March 2027, according to guidance updated on 2 October 2026. It was first expected in spring 2026.</p>
+<p>The scheme comes from the Levelling-up and Regeneration Act 2023 and is meant to show councils where short-term lets are and how many there are. Guidance from booking software firm Lodgify suggests a glamping site would need to register each letting unit separately, along with evidence of gas and fire safety certificates. The final details depend on rules that have not yet been published.</p>
+<p>If you are planning a site for 2027, it makes sense to have your fire risk assessment and safety certificates in order before the register opens.</p>
+<p class="src">Sources: <a href="https://www.clydeco.com/en/insights/2026/10/england-s-short-let-registration-scheme-what-the-m">Clyde &amp; Co</a>, <a href="https://encyclopedia.lodgify.com/england-short-term-let-registration-scheme">Lodgify</a></p>`},
+ {id:'news-glamping-show-2026',d:'September 2026',tag:'Industry news',t:'The Glamping Show 2026 at Stoneleigh',s:'Around 100 exhibitors at NAEC Stoneleigh from 10 to 12 September.',cats:['shepherd-huts','glamping-pods','hot-tubs'],b:`
+<p>The Glamping Show ran from 10 to 12 September 2026 at NAEC Stoneleigh in Warwickshire, with around 100 exhibitors. Trade title Camping Business reported that the UK glamping market appears to be in a healthy state.</p>
+<p>The organisers are planning a European forum in Amsterdam in November.</p>
+<p class="src">Sources: <a href="https://www.campingbusiness.eu/en/the-glamping-show-2026-uk-industry-appears-to-be-in-a-healthy-state/">Camping Business</a>, <a href="https://www.theglampingshow.com/">The Glamping Show</a></p>`},
+ {id:'news-guest-trends-2026',d:'2026',tag:'Industry news',t:'What glamping guests want in 2026',s:'Shorter stays, lower rates and cabin-style units.',cats:['glamping-pods','shepherd-huts','hot-tubs'],b:`
+<p>Canopy &amp; Stars' 2026 marketing report says guests are looking for lower rates or shorter stays. A separate 2026 report from booking software firm RMS found that 66% of guests prefer cabin-style accommodation.</p>
+<p>A Glampingstays report says 60% of UK adults have been glamping or plan to go, and that between 65% and 82% of glamping bookings do not include children.</p>
+<p class="src">Sources: <a href="https://www.campingcabins.co.uk/blog/2026-glamping-industry-trends">Camping Cabins</a>, <a href="https://www.groupaccommodation.com/blog/owner-resources/uk-glamping-industry-trends-2026">Group Accommodation</a></p>`}
+];
+const NAV=[['shop','Shop'],['safety','Safety'],['advice','Advice'],['news','News']];
+let enquiryFor='';
+const app=document.getElementById('app');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const byCat=id=>MAKERS.filter(m=>m.c===id);
+const cat=id=>CATS.find(c=>c.id===id);
+const guide=id=>GUIDES.find(g=>g.id===id);
+const post=id=>NEWS.find(n=>n.id===id);
+function nlist(items){return `<ul class="glist">${items.map(n=>`<li><a href="#${n.id}"><div><span class="label" style="color:var(--bracken)">${n.tag} · ${n.d}</span><h3>${esc(n.t)}</h3><p>${esc(n.s)}</p></div><span class="go">Read</span></a></li>`).join('')}</ul>`}
+
+function contours(){return `<svg class="contours" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-20 340 C180 300 300 360 480 320 S820 250 980 290 1180 260 1240 250"/><path d="M-20 300 C170 255 320 320 500 280 S800 205 970 245 1180 215 1240 205"/><path d="M-20 258 C160 212 340 280 520 240 S790 162 960 200 1170 172 1240 160"/><path d="M-20 214 C150 170 360 238 540 200 S780 120 950 156 1160 130 1240 116"/><path d="M300 170 C420 120 560 150 640 120 S780 70 900 98"/><path d="M420 128 C520 96 600 112 680 88 S790 52 860 66"/></svg>`}
+function tiles(group){return `<div class="tiles">${CATS.filter(c=>c.g===group).map(c=>`<a class="tile" href="#${c.id}">${ICONS[c.id]}<h3>${c.name}</h3><span>${c.short}</span></a>`).join('')}</div>`}
+function glist(ids){return `<ul class="glist">${ids.map(guide).map(g=>`<li><a href="#${g.id}"><div><h3>${esc(g.t)}</h3><p>${esc(g.s)}</p></div><span class="go">Read</span></a></li>`).join('')}</ul>`}
+function page(label,title,lede,body,crumbs){return `<main class="gut"><div class="inner"><div class="pagehead">${crumbs?`<div class="crumbs">${crumbs}</div>`:''}<div class="label" style="color:var(--muted)">${label}</div><h1>${title}</h1>${lede?`<p class="intro">${lede}</p>`:''}</div><div class="sheet">${body}</div></div></main>`}
+
+const V={
+home:()=>`<section class="hero gut">${contours()}<div class="inner">
+    <h1>Luxury shepherd huts, pods and hot tubs, made in Britain</h1>
+  <div class="btns"><a class="btn" href="#shepherd-huts">Browse shepherd huts</a><a class="btn ghost" href="#earnings">What could it earn?</a></div>
+</div></section>
+<main class="gut"><div class="inner sheet">
+  <section class="block"><div class="head"><h2>Luxury glamping for sale</h2></div>${tiles('glamp')}</section>
+  <section class="block"><div class="head"><span class="label">Earnings calculator</span><h2>What could a hut, pod or tent earn?</h2></div><p class="intro">Put in the price, your nightly rate and your costs to see yearly profit and payback.</p><div style="justify-self:center"><a class="btn" href="#earnings">Work it out</a></div></section>
+  <section class="block"><div class="head"><span class="label">Before you buy</span><h2>Planning, costs and safety</h2></div>${glist(['planning','earnings','hut-or-pod','checklist'])}<div style="justify-self:center"><a class="btn ghost" href="#advice">All advice</a></div></section>
+  <section class="block"><div class="head"><span class="label">News</span><h2>Industry news</h2></div>${nlist(NEWS.slice(0,3))}<div style="justify-self:center"><a class="btn ghost" href="#news">All news</a></div></section>
+</div></main>`,
+safety:()=>page('Safety','Safety and compliance','What needs to be in place before guests arrive, and the checks to keep up each year.',`<section class="block"><div class="bundles">
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Electrics</span><h3>EICR and PAT testing</h3><p class="intro">An inspection of the fixed wiring, and a test of every appliance guests can plug in.</p><div class="related"><a href="#electrical">Read the guide</a><a href="#pat-testing">Book a PAT test</a></div></div>
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Fire</span><h3>Fire risk assessment</h3><p class="intro">A written assessment for every site taking paying guests, plus alarms, extinguishers and spacing between units.</p><div class="related"><a href="#fire">Read the guide</a></div></div>
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Gas</span><h3>Gas safety check</h3><p class="intro">A yearly check by a Gas Safe registered engineer on any LPG hob, heater or boiler.</p><div class="related"><a href="#gas-water">Read the guide</a></div></div>
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Stoves</span><h3>Stoves and carbon monoxide</h3><p class="intro">Installation to Building Regulations, a carbon monoxide alarm and a yearly sweep.</p><div class="related"><a href="#stoves">Read the guide</a></div></div>
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Hot tubs</span><h3>Legionella and water hygiene</h3><p class="intro">A risk assessment, regular water testing and written records, following HSE guidance.</p><div class="related"><a href="#hot-tubs">Read the guide</a></div></div>
+  <div class="bundle"><span class="label" style="color:var(--bracken)">Water and waste</span><h3>Private supplies and drainage</h3><p class="intro">Council checks on private water, and the right setup for toilets and showers.</p><div class="related"><a href="#gas-water">Read the guide</a></div></div>
+</div><div style="justify-self:center"><a class="btn" href="#checklist">The full checklist</a></div></section>`),
+shop:()=>page('The shop','Luxury glamping for sale','Every unit is made in Britain.',`<section class="block">${tiles('glamp')}</section>`),
+advice:()=>page('Advice','Advice for opening a glamping site','Planning, safety and running costs.',`<section class="block">${glist(GUIDES.map(g=>g.id))}</section>`),
+'pat-testing':()=>page('<a href="#safety" style="color:inherit">Safety</a>','PAT testing for huts and pods','Book a PAT test before your first guests arrive, then once a year after that.',`<section class="block twocol"><div class="article">
+<p>Portable appliances in a holiday let get moved around and used hard by people who don't own them. PAT testing checks each one and gives you a dated record to keep with your safety paperwork.</p>
+<p>Peak Edge PAT tests the appliances in shepherd huts, pods and other guest accommodation, labels each item and gives you a written report.</p>
+<p><a href="#electrical">Read the electrical safety guide</a></p></div>
+<div><form class="enq" data-form="pat"><label for="pat-name">Your name<input id="pat-name" required></label><label for="pat-pc">Site postcode<input id="pat-pc" required></label><label for="pat-units">Number of units<input id="pat-units" type="number" min="1" value="1"></label><label for="pat-email">Email<input id="pat-email" type="email" required></label><button class="btn" type="submit">Request a PAT test</button><div class="ok" hidden>Thanks. This is a private preview, so the request was not sent.</div></form></div></section>`),
+books:()=>page('Books','Books for landlords and holiday let owners','Plain-English guides to running guest accommodation safely and legally.',`<section class="block"><div class="ph" style="aspect-ratio:auto;padding:28px;font-size:.9rem">Book covers, titles, descriptions and buy links go here.</div></section>`),
+news:()=>page('News','News and industry news','Planning, regulation and market news for glamping sites.',`<section class="block">${nlist(NEWS)}</section>`),
+enquire:()=>page('Enquire','Send an enquiry','Tell us what you need and we\'ll come back to you with a price.',`<section class="block"><form class="enq" data-form="enq">
+<label for="enq-what">Enquiring about<input id="enq-what" value="${esc(enquiryFor)}"></label>
+<label for="enq-name">Your name<input id="enq-name" required></label>
+<label for="enq-email">Email<input id="enq-email" type="email" required></label>
+<label for="enq-pc">Site postcode<input id="enq-pc"></label>
+<label for="enq-when">When do you need it?<select id="enq-when"><option>Within 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just researching</option></select></label>
+<label for="enq-msg">Anything else<textarea id="enq-msg" rows="4"></textarea></label>
+<button class="btn" type="submit">Send enquiry</button><div class="ok" hidden>Thanks. This is a private preview, so the enquiry was not sent.</div></form></section>`)
+};
+
+function catView(c){
+  const ms=byCat(c.id);
+  const list=ms.map(m=>`<div class="maker"><div class="ph">Photo coming</div><div><h3>${esc(m.n)}</h3><div class="loc">${esc(m.loc||'Made in Britain')}</div><p>${esc(m.p)}</p></div><div class="act"><div class="price">${m.price?esc(m.price):'Price on enquiry'}<small>${m.price?'Price guide':'Ask for a quote'}</small></div><a class="btn" href="#enquire" data-enq="${esc(c.name)}: ${esc(m.n)}">Enquire</a></div></div>`).join('');
+  const side=`<div class="notes"><span class="label">Before you buy</span><ul>${c.check.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  return page('The shop',(c.title||`${c.name} for sale`),c.intro,
+   `<section class="block"><div class="makers">${list}</div></section>${c.check.length||c.guides.length?`<section class="block twocol">${c.check.length?side:'<div></div>'}<div>${c.guides.length?`<div class="head"><span class="label">Read first</span></div>${glist(c.guides)}`:''}</div></section>`:''}${(c.with||[]).length?`<section class="block"><div class="head"><span class="label">Goes well with</span></div><div class="related" style="justify-content:center">${c.with.map(id=>`<a href="#${id}">${cat(id).name}</a>`).join('')}</div></section>`:''}`,
+   `<a href="#shop">Shop</a> / ${c.name}`);
+}
+function guideView(g){
+  const calc=g.calc?`<div class="calc"><div>
+<label for="c-price">Unit price, delivered (£)<input id="c-price" type="number" value="25000"></label>
+<label for="c-rate">Nightly rate (£)<input id="c-rate" type="number" value="120"></label>
+<label for="c-nights">Nights let per year<input id="c-nights" type="number" value="150"></label>
+<label for="c-var">Cost per night let: cleaning, laundry, energy (£)<input id="c-var" type="number" value="25"></label>
+<label for="c-fixed">Yearly fixed costs: insurance, rates, maintenance, booking fees (£)<input id="c-fixed" type="number" value="2500"></label>
+</div><div class="out"><div><span>Yearly income</span><b id="o-inc">£0</b></div><div><span>Yearly profit before tax</span><b id="o-prof">£0</b></div><div><span>Years to pay back the unit</span><b id="o-pay">0</b></div><span>Example figures only. Replace them with your own, and check them against booking sites near you.</span></div></div>`:'';
+  return page('Advice',esc(g.t),esc(g.s),`<section class="block"><div class="article">${g.b}${calc}${g.cats.length?`<div class="head" style="margin-top:12px"><span class="label">Shop for this</span></div><div class="related">${g.cats.map(id=>`<a href="#${id}">${cat(id).name}</a>`).join('')}</div>`:''}</div></section>`,`<a href="#advice">Advice</a>`);
+}
+function newsView(n){
+  return page(`${n.tag} · ${n.d}`,esc(n.t),esc(n.s),`<section class="block"><div class="article">${n.b}${n.cats.length?`<div class="head" style="margin-top:12px"><span class="label">Shop</span></div><div class="related">${n.cats.map(id=>`<a href="#${id}">${cat(id).name}</a>`).join('')}</div>`:''}</div></section>`,`<a href="#news">News</a>`);
+}
+function runCalc(){
+  const v=id=>+document.getElementById(id).value||0;
+  const inc=v('c-rate')*v('c-nights'), prof=inc-v('c-var')*v('c-nights')-v('c-fixed');
+  const f=n=>'£'+Math.round(n).toLocaleString('en-GB');
+  document.getElementById('o-inc').textContent=f(inc);
+  document.getElementById('o-prof').textContent=f(prof);
+  document.getElementById('o-pay').textContent=prof>0?(v('c-price')/prof).toFixed(1)+' years':'Does not pay back';
+}
+function render(){
+  const r=(location.hash.slice(1)||'home');
+  const c=cat(r), g=guide(r), n=post(r);
+  app.innerHTML=c?catView(c):g?guideView(g):n?newsView(n):(V[r]||V.home)();
+  document.getElementById('nav').innerHTML=NAV.map(([id,l])=>`<a href="#${id}"${(id===r||(id==='shop'&&c)||(id==='advice'&&g)||(id==='safety'&&r==='pat-testing')||(id==='news'&&n))?' aria-current="page"':''}>${l}</a>`).join('');
+  if(document.getElementById('c-price')){app.querySelectorAll('.calc input').forEach(i=>i.addEventListener('input',runCalc));runCalc()}
+  window.scrollTo(0,0);
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-enq]');if(a){enquiryFor=a.dataset.enq;if(location.hash==='#enquire')render()}});
+document.addEventListener('submit',e=>{const f=e.target.closest('form.enq');if(!f)return;e.preventDefault();f.querySelector('.ok').hidden=false});
+window.addEventListener('hashchange',render);
+render();
+</script>
+
+</body>
+</html>
