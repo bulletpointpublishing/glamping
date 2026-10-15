@@ -139,6 +139,33 @@ form.enq input,form.enq select,form.enq textarea{font:inherit;font-size:1rem;let
 footer{background:var(--blue);color:var(--onblue-dim);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
 footer .inner{padding-block:36px;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
 footer a{color:var(--onblue)}
+
+.pl-top{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.pl-top label{display:grid;gap:6px;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.pl-top input{font:inherit;font-size:1rem;letter-spacing:0;padding:10px 12px;border:1px solid var(--rule);background:var(--sheet);color:var(--fg);width:120px}
+.pl-wrap{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
+.pl-wrap > *{min-width:0}
+.pl-add{display:grid;gap:6px}
+.pl-btn{font:inherit;text-align:left;padding:9px 12px;border:1px solid var(--rule);background:var(--sheet);color:var(--fg);cursor:pointer;display:grid;gap:2px;font-size:.92rem}
+.pl-btn small{color:var(--muted);font-size:.75rem}
+.pl-btn:hover{border-color:var(--ink)}
+.pl-stage{display:grid;gap:10px}
+#pl-svg{width:100%;height:auto;max-height:70vh;background:var(--field);border:1px solid var(--rule);touch-action:none;user-select:none}
+.pl-field{fill:#dfe6d2;stroke:var(--moss);stroke-width:.15}
+.pl-grid{stroke:var(--moss);stroke-width:.04;opacity:.5}
+.pl-item rect,.pl-item circle{fill:var(--stone);stroke:var(--grit);stroke-width:.12;cursor:grab}
+.pl-item.unit rect,.pl-item.unit circle{fill:#fff;stroke:var(--blue)}
+.pl-item.close rect,.pl-item.close circle{stroke:#b3261e;stroke-width:.3}
+.pl-item.sel rect,.pl-item.sel circle{stroke:var(--bracken);stroke-width:.35}
+.pl-item text,.pl-scale{fill:#17242a;text-anchor:middle;font-family:var(--sans);pointer-events:none}
+.pl-scale{text-anchor:start;fill:var(--muted)}
+.pl-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pl-bar b{font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:.85rem;margin-right:6px}
+.pl-hint{font-size:.85rem;color:var(--muted)}
+.pl-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.pl-list li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);font-weight:300}
+.pl-list a{font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+@media (max-width:760px){.pl-wrap{grid-template-columns:1fr}.pl-add{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 
 </head>
@@ -289,7 +316,7 @@ const NEWS = [
 <p>A Glampingstays report says 60% of UK adults have been glamping or plan to go, and that between 65% and 82% of glamping bookings do not include children.</p>
 <p class="src">Sources: <a href="https://www.campingcabins.co.uk/blog/2026-glamping-industry-trends">Camping Cabins</a>, <a href="https://www.groupaccommodation.com/blog/owner-resources/uk-glamping-industry-trends-2026">Group Accommodation</a></p>`}
 ];
-const NAV=[['shop','Shop'],['safety','Safety'],['advice','Advice'],['news','News']];
+const NAV=[['shop','Shop'],['plan','Plan your site'],['safety','Safety'],['advice','Advice'],['news','News']];
 let enquiryFor='';
 const app=document.getElementById('app');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -307,10 +334,11 @@ function page(label,title,lede,body,crumbs){return `<main class="gut"><div class
 const V={
 home:()=>`<section class="hero gut">${contours()}<div class="inner">
     <h1>Luxury shepherd huts, pods and hot tubs, made in Britain</h1>
-  <div class="btns"><a class="btn" href="#shepherd-huts">Browse shepherd huts</a><a class="btn ghost" href="#earnings">What could it earn?</a></div>
+  <div class="btns"><a class="btn" href="#plan">Plan your site</a><a class="btn ghost" href="#shepherd-huts">Browse shepherd huts</a></div>
 </div></section>
 <main class="gut"><div class="inner sheet">
   <section class="block"><div class="head"><h2>Luxury glamping for sale</h2></div>${tiles('glamp')}</section>
+  <section class="block"><div class="head"><span class="label">Site planner</span><h2>See your field laid out</h2></div><p class="intro">Enter your field size and arrange huts, tents, hot tubs and seating to scale.</p><div style="justify-self:center"><a class="btn" href="#plan">Plan your site</a></div></section>
   <section class="block"><div class="head"><span class="label">Earnings calculator</span><h2>What could a hut, pod or tent earn?</h2></div><p class="intro">Put in the price, your nightly rate and your costs to see yearly profit and payback.</p><div style="justify-self:center"><a class="btn" href="#earnings">Work it out</a></div></section>
   <section class="block"><div class="head"><span class="label">Before you buy</span><h2>Planning, costs and safety</h2></div>${glist(['planning','earnings','hut-or-pod','checklist'])}<div style="justify-self:center"><a class="btn ghost" href="#advice">All advice</a></div></section>
   <section class="block"><div class="head"><span class="label">News</span><h2>Industry news</h2></div>${nlist(NEWS.slice(0,3))}<div style="justify-self:center"><a class="btn ghost" href="#news">All news</a></div></section>
@@ -331,6 +359,7 @@ advice:()=>page('Advice','Advice for opening a glamping site','Planning, safety 
 <p><a href="#electrical">Read the electrical safety guide</a></p></div>
 <div><form class="enq" data-form="pat"><label for="pat-name">Your name<input id="pat-name" required></label><label for="pat-pc">Site postcode<input id="pat-pc" required></label><label for="pat-units">Number of units<input id="pat-units" type="number" min="1" value="1"></label><label for="pat-email">Email<input id="pat-email" type="email" required></label><button class="btn" type="submit">Request a PAT test</button><div class="ok" hidden>Thanks. This is a private preview, so the request was not sent.</div></form></div></section>`),
 books:()=>page('Books','Books for landlords and holiday let owners','Plain-English guides to running guest accommodation safely and legally.',`<section class="block"><div class="ph" style="aspect-ratio:auto;padding:28px;font-size:.9rem">Book covers, titles, descriptions and buy links go here.</div></section>`),
+plan:()=>plannerView(),
 news:()=>page('News','News and industry news','Planning, regulation and market news for glamping sites.',`<section class="block">${nlist(NEWS)}</section>`),
 enquire:()=>page('Enquire','Send an enquiry','Tell us what you need and we\'ll come back to you with a price.',`<section class="block"><form class="enq" data-form="enq">
 <label for="enq-what">Enquiring about<input id="enq-what" value="${esc(enquiryFor)}"></label>
@@ -363,6 +392,77 @@ function guideView(g){
 function newsView(n){
   return page(`${n.tag} · ${n.d}`,esc(n.t),esc(n.s),`<section class="block"><div class="article">${n.b}${n.cats.length?`<div class="head" style="margin-top:12px"><span class="label">Shop</span></div><div class="related">${n.cats.map(id=>`<a href="#${id}">${cat(id).name}</a>`).join('')}</div>`:''}</div></section>`,`<a href="#news">News</a>`);
 }
+const PITEMS=[
+ {k:'hut',n:'Shepherd hut',w:6,h:2.5,cat:'shepherd-huts',unit:1},
+ {k:'pod',n:'Glamping pod',w:5,h:3,cat:'glamping-pods',unit:1},
+ {k:'bell',n:'Bell tent',d:5,cat:'tents',unit:1},
+ {k:'safari',n:'Safari tent',w:7,h:5,cat:'tents',unit:1},
+ {k:'tub',n:'Hot tub',d:2,cat:'hot-tubs'},
+ {k:'shelter',n:'Hot tub shelter',w:3,h:3,cat:'shelters'},
+ {k:'sauna',n:'Sauna',w:2.5,h:2.2,cat:'saunas'},
+ {k:'gazebo',n:'Oak gazebo',w:4,h:4,cat:'communal'},
+ {k:'kitchen',n:'Outdoor kitchen',w:3,h:1,cat:'communal'},
+ {k:'oven',n:'Wood-fired oven',w:1.5,h:1.5,cat:'communal'},
+ {k:'bench',n:'Picnic bench',w:2,h:1.5,cat:'communal'},
+ {k:'fire',n:'Fire pit',d:1.2},
+ {k:'park',n:'Parking space',w:2.5,h:5},
+ {k:'block',n:'Toilet and shower block',w:4,h:3}
+];
+const PI=k=>PITEMS.find(p=>p.k===k);
+const GAP=6;
+let plan=null, sel=null;
+function loadPlan(){try{const s=JSON.parse(localStorage.getItem('tge-plan')||'null');if(s&&s.W)return s}catch(e){}return {W:60,L:40,items:[{id:1,k:'hut',x:15,y:12,r:0},{id:2,k:'tub',x:20,y:12,r:0},{id:3,k:'pod',x:35,y:12,r:0},{id:4,k:'gazebo',x:28,y:28,r:0},{id:5,k:'fire',x:28,y:34,r:0}],next:6}}
+function savePlan(){try{localStorage.setItem('tge-plan',JSON.stringify(plan))}catch(e){}}
+function dims(it){const p=PI(it.k);if(p.d)return{w:p.d,h:p.d,c:1};return it.r%180?{w:p.h,h:p.w}:{w:p.w,h:p.h}}
+function box(it){const d=dims(it);return{x1:it.x-d.w/2,y1:it.y-d.h/2,x2:it.x+d.w/2,y2:it.y+d.h/2}}
+function gap(a,b){const A=box(a),B=box(b);const dx=Math.max(0,B.x1-A.x2,A.x1-B.x2),dy=Math.max(0,B.y1-A.y2,A.y1-B.y2);return Math.hypot(dx,dy)}
+function plannerView(){
+  return page('Plan your site','Plan your glamping site','Enter your field size, then add huts, tents, hot tubs and more to see how your site could look.',`<section class="block">
+<div class="pl-top"><label for="pl-w">Field width (m)<input id="pl-w" type="number" min="5" max="500"></label><label for="pl-l">Field length (m)<input id="pl-l" type="number" min="5" max="500"></label><button class="btn ghost" type="button" id="pl-set">Set field</button><button class="btn ghost" type="button" id="pl-clear">Clear field</button></div>
+<div class="pl-wrap"><div class="pl-add"><span class="label" style="color:var(--muted)">Add to your field</span>${PITEMS.map(p=>`<button type="button" class="pl-btn" data-add="${p.k}">${p.n}<small>${p.d?p.d+' m across':p.w+' × '+p.h+' m'}</small></button>`).join('')}</div>
+<div class="pl-stage"><svg id="pl-svg" role="img" aria-label="Plan of your field"></svg>
+<div class="pl-bar" id="pl-bar" hidden><b id="pl-name"></b><button type="button" class="btn ghost" id="pl-rot">Rotate</button><button type="button" class="btn ghost" id="pl-del">Remove</button><a class="btn" id="pl-shop" href="#shop">Shop</a></div>
+<p class="pl-hint">Drag items to move them. Tap an item to rotate or remove it. Sizes are typical and vary by model.</p></div></div>
+<div class="twocol" style="margin-top:8px"><div><div class="head" style="justify-items:start;text-align:left"><span class="label">On your plan</span></div><ul class="pl-list" id="pl-list"></ul></div>
+<div class="notes"><span class="label">Spacing</span><p>Caravan site licences usually ask for 6 metres between units, and councils often apply the same to glamping. Units closer than that are outlined in red. Check the rules with your council.</p><p><a href="#planning">Planning guide</a> · <a href="#fire">Fire safety guide</a></p></div></div>
+</section>`);
+}
+function drawPlan(){
+  const svg=document.getElementById('pl-svg');if(!svg)return;
+  const {W,L}=plan;svg.setAttribute('viewBox',`-1 -1 ${W+2} ${L+2}`);
+  let g='';for(let x=0;x<=W;x+=5)g+=`<line x1="${x}" y1="0" x2="${x}" y2="${L}" class="pl-grid"/>`;for(let y=0;y<=L;y+=5)g+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" class="pl-grid"/>`;
+  const units=plan.items.filter(i=>PI(i.k).unit);const close=new Set();
+  for(let i=0;i<units.length;i++)for(let j=i+1;j<units.length;j++)if(gap(units[i],units[j])<GAP){close.add(units[i].id);close.add(units[j].id)}
+  const fs=Math.max(0.6,Math.min(W,L)/45);
+  const items=plan.items.map(it=>{const p=PI(it.k),d=dims(it);const cls=`pl-item${p.unit?' unit':''}${close.has(it.id)?' close':''}${sel===it.id?' sel':''}`;
+    const shape=d.c?`<circle cx="${it.x}" cy="${it.y}" r="${d.w/2}"/>`:`<rect x="${it.x-d.w/2}" y="${it.y-d.h/2}" width="${d.w}" height="${d.h}"/>`;
+    return `<g class="${cls}" data-id="${it.id}">${shape}<text x="${it.x}" y="${it.y+(d.h/2)+fs*1.2}" font-size="${fs}">${esc(p.n)}</text></g>`}).join('');
+  svg.innerHTML=`<rect x="0" y="0" width="${W}" height="${L}" class="pl-field"/>${g}${items}<text x="0" y="${L+0.9}" font-size="${fs*0.9}" class="pl-scale">Grid squares are 5 m · Field ${W} × ${L} m</text>`;
+  const list=document.getElementById('pl-list');
+  const counts={};plan.items.forEach(i=>counts[i.k]=(counts[i.k]||0)+1);
+  list.innerHTML=Object.keys(counts).length?Object.entries(counts).map(([k,n])=>{const p=PI(k);return `<li><span>${n} × ${esc(p.n)}</span>${p.cat?`<a href="#${p.cat}">Shop</a>`:''}</li>`}).join(''):'<li>Your field is empty. Add something from the list.</li>';
+  const bar=document.getElementById('pl-bar');const s=plan.items.find(i=>i.id===sel);bar.hidden=!s;
+  if(s){const p=PI(s.k);document.getElementById('pl-name').textContent=p.n;document.getElementById('pl-rot').hidden=!!p.d;const sh=document.getElementById('pl-shop');sh.hidden=!p.cat;if(p.cat)sh.href='#'+p.cat}
+  savePlan();
+}
+function initPlanner(){
+  plan=loadPlan();sel=null;
+  const w=document.getElementById('pl-w'),l=document.getElementById('pl-l');w.value=plan.W;l.value=plan.L;
+  document.getElementById('pl-set').onclick=()=>{const W=Math.min(500,Math.max(5,+w.value||0)),L=Math.min(500,Math.max(5,+l.value||0));plan.W=W;plan.L=L;plan.items.forEach(i=>{i.x=Math.min(i.x,W);i.y=Math.min(i.y,L)});drawPlan()};
+  document.getElementById('pl-clear').onclick=()=>{plan.items=[];sel=null;drawPlan()};
+  app.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const it={id:plan.next++,k:b.dataset.add,x:plan.W/2,y:plan.L/2,r:0};plan.items.push(it);sel=it.id;drawPlan()});
+  document.getElementById('pl-rot').onclick=()=>{const s=plan.items.find(i=>i.id===sel);if(s){s.r=(s.r+90)%360;drawPlan()}};
+  document.getElementById('pl-del').onclick=()=>{plan.items=plan.items.filter(i=>i.id!==sel);sel=null;drawPlan()};
+  const svg=document.getElementById('pl-svg');let drag=null;
+  const pt=e=>{const m=svg.getScreenCTM().inverse();const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(m);return p};
+  svg.addEventListener('pointerdown',e=>{const g=e.target.closest('.pl-item');if(!g){sel=null;drawPlan();return}
+    const it=plan.items.find(i=>i.id===+g.dataset.id);const p=pt(e);drag={it,dx:it.x-p.x,dy:it.y-p.y};sel=it.id;svg.setPointerCapture(e.pointerId);drawPlan();e.preventDefault()});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const p=pt(e),d=dims(drag.it);
+    drag.it.x=Math.round(Math.min(plan.W-d.w/2,Math.max(d.w/2,p.x+drag.dx))*10)/10;drag.it.y=Math.round(Math.min(plan.L-d.h/2,Math.max(d.h/2,p.y+drag.dy))*10)/10;drawPlan()});
+  const end=()=>{drag=null};svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  drawPlan();
+}
+
 function runCalc(){
   const v=id=>+document.getElementById(id).value||0;
   const inc=v('c-rate')*v('c-nights'), prof=inc-v('c-var')*v('c-nights')-v('c-fixed');
@@ -376,6 +476,7 @@ function render(){
   const c=cat(r), g=guide(r), n=post(r);
   app.innerHTML=c?catView(c):g?guideView(g):n?newsView(n):(V[r]||V.home)();
   document.getElementById('nav').innerHTML=NAV.map(([id,l])=>`<a href="#${id}"${(id===r||(id==='shop'&&c)||(id==='advice'&&g)||(id==='safety'&&r==='pat-testing')||(id==='news'&&n))?' aria-current="page"':''}>${l}</a>`).join('');
+  if(document.getElementById('pl-svg'))initPlanner();
   if(document.getElementById('c-price')){app.querySelectorAll('.calc input').forEach(i=>i.addEventListener('input',runCalc));runCalc()}
   window.scrollTo(0,0);
 }
